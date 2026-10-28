@@ -40,7 +40,7 @@ class Shell:
         command, *args = parts
         handlers = {
             "ls": self.ls, "cd": self.cd, "head": self.head,
-            "whoami": self.whoami,
+            "whoami": self.whoami, "touch": self.touch,
             "exit": self.exit,
         }
         if command not in handlers:
@@ -124,6 +124,14 @@ class Shell:
         """Return the actual host OS username."""
         self.no_arguments("whoami", args)
         return getpass.getuser()
+
+    def touch(self, args):
+        """Create/update one or more virtual files, without disk writes."""
+        if not args or any(arg.startswith("-") for arg in args):
+            raise ValueError("touch: ожидается FILE... без опций")
+        for name in args:
+            self.vfs.touch(self.vfs.resolve(name, self.cwd))
+        return ""
 
     def exit(self, args):
         """Request termination of both script execution and REPL."""

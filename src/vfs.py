@@ -53,10 +53,7 @@ class Vfs:
         if set(row) != set(FIELDS) or None in row.values():
             raise ValueError("CSV: неверное количество полей")
         path, kind, data = (row[key] for key in FIELDS)
-        if not path.startswith(ROOT) or "\x00" in path:
-            raise ValueError("CSV: путь должен быть абсолютным")
-        if self.resolve(path) != path or path.startswith("//"):
-            raise ValueError(f"CSV: неканонический путь {path}")
+        self.validate_path(path)
         if path in seen:
             raise ValueError(f"CSV: дубликат пути {path}")
         if kind not in {"file", "dir"}:
@@ -67,6 +64,13 @@ class Vfs:
             raise ValueError("CSV: корень должен быть каталогом")
         self.nodes[path] = Node(kind, base64.b64decode(data, validate=True))
         seen.add(path)
+
+    def validate_path(self, path):
+        """Reject relative, noncanonical and NUL-containing CSV paths."""
+        if not path.startswith(ROOT) or "\x00" in path:
+            raise ValueError("CSV: путь должен быть абсолютным")
+        if self.resolve(path) != path or path.startswith("//"):
+            raise ValueError(f"CSV: неканонический путь {path}")
 
     def validate_parents(self):
         """Require an explicit directory parent, regardless of row order."""
