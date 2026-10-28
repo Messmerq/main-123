@@ -161,6 +161,7 @@ python3 src/repl.py < examples/stage1.txt
   `execute` выбирает команду; `ls`, `cd`, `head`, `whoami`, `touch`, `exit`
   реализуют команды. `list_entry` форматирует вывод `ls`,
   `ls_arguments` проверяет опции, `list_path` форматирует один путь,
+  `head_arguments` проверяет число строк и пути для `head`,
   `no_arguments` проверяет команды без аргументов.
 - `tests/test_emulator.py`: изолированные тесты парсера, CLI, VFS, команд,
   ошибок, сценариев, REPL и неизменности физического CSV.
