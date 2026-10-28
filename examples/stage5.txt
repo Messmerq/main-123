@@ -1,0 +1,15 @@
+# Дополнительная команда touch
+touch /new.txt /second.txt
+ls -l /
+head /new.txt
+touch /hello.txt
+head /hello.txt
+cd /docs
+touch local.txt
+ls -l
+touch
+touch -a local.txt
+touch /missing/file
+cd /
+ls -a
+exit

@@ -1,0 +1,28 @@
+# Основные команды и все режимы
+ls
+ls -a
+ls -l
+ls -al
+ls -la
+ls /hello.txt /docs
+cd /docs
+cd projects/python
+head notes.txt
+head -n 1 notes.txt
+head -n 0 notes.txt
+head notes.txt /hello.txt
+whoami
+cd ..
+cd
+ls -z
+cd /missing
+cd a b
+head
+head -n x /hello.txt
+head -n -1 /hello.txt
+head /docs
+head /missing
+whoami extra
+unknown
+exit extra
+exit

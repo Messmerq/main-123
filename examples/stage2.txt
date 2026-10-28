@@ -1,0 +1,5 @@
+# Комментарий Python
+ls # inline
+unknown
+cd /
+exit

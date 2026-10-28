@@ -1,0 +1,8 @@
+path,type,data
+/,dir,
+/docs,dir,
+/docs/projects,dir,
+/docs/projects/python,dir,
+/docs/projects/python/notes.txt,file,0JLQsNGA0LjQsNC90YIgMTcKUHl0aG9uCtCi0YDQtdGC0YzRjyDRgdGC0YDQvtC60LAK
+/hello.txt,file,SGVsbG8sIHZpcnR1YWwgd29ybGQhClNlY29uZCBsaW5lCg==
+/.hidden,file,aGlkZGVuCg==

@@ -1,0 +1,9 @@
+# Проверка структуры VFS
+ls -a /
+cd /docs/projects/python
+ls
+cd ..
+ls -l
+cd /missing
+cd /
+exit
