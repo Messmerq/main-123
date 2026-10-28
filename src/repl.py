@@ -1,6 +1,9 @@
 """Stage 1: minimal command loop and whitespace parser."""
 
 
+MAX_CD_ARGUMENTS = 1
+
+
 def parse(line):
     """Split input by whitespace; quoting is intentionally unsupported."""
     return line.split()
@@ -18,7 +21,7 @@ def prototype(line):
         if args:
             raise ValueError("exit: аргументы не поддерживаются")
         raise EOFError
-    if command == "cd" and len(args) > 1:
+    if command == "cd" and len(args) > MAX_CD_ARGUMENTS:
         raise ValueError("cd: ожидается не более одного пути")
     return f"{command}: {args}"
 

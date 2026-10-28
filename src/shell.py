@@ -97,17 +97,7 @@ class Shell:
 
     def head(self, args):
         """Show first ten lines, or -n COUNT lines, from virtual files."""
-        count = DEFAULT_LINES
-        if args and args[0] == "-n":
-            try:
-                count = int(args[1])
-            except (IndexError, ValueError) as error:
-                raise ValueError("head: после -n нужно целое число") from error
-            args = args[2:]
-        if count < MIN_LINES or not args:
-            raise ValueError("head: ожидаются [-n N] FILE..., N >= 0")
-        if any(arg.startswith("-") for arg in args):
-            raise ValueError("head: неизвестная опция")
+        count, args = self.head_arguments(args)
         output = []
         for name in args:
             path = self.vfs.resolve(name, self.cwd)
@@ -119,6 +109,22 @@ class Shell:
                 output.append(f"==> {name} <==\n")
             output.append("".join(text.splitlines(keepends=True)[:count]))
         return "".join(output).rstrip("\n")
+
+    @staticmethod
+    def head_arguments(args):
+        """Validate the optional nonnegative line count and file operands."""
+        count = DEFAULT_LINES
+        if args and args[0] == "-n":
+            try:
+                count = int(args[1])
+            except (IndexError, ValueError) as error:
+                raise ValueError("head: после -n нужно целое число") from error
+            args = args[2:]
+        if count < MIN_LINES or not args:
+            raise ValueError("head: ожидаются [-n N] FILE..., N >= 0")
+        if any(arg.startswith("-") for arg in args):
+            raise ValueError("head: неизвестная опция")
+        return count, args
 
     def whoami(self, args):
         """Return the actual host OS username."""
